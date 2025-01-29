@@ -60,13 +60,48 @@ import matplotlib.pyplot as plt
 # Load the Excel file
 data = pd.read_excel('/content/sample_data/dataset for ecommerce.xlsx')
 
-# Display the first 5 rows
-print(data.head())
+## Monthly Sales Trend
 
-```plaintext
-customer_id  customer_full_name  category_name       product_name                            customer_segment  customer_city   customer_state  customer_country  customer_region  delivery_status  order_date           order_id          ship_date          shipping_type  order_item_discount  sales_per_order  order_quantity  profit_per_order  
-C_ID_55205   Mary Howell        Office Supplies    Xerox 1898                              Consumer          Quincy         Massachusetts  United States   East            Late delivery    2015-01-02 00:00:00  CA-2015-140795  2015-03-02 00:00:00  Standard Class  8.80                 159.96           1              -32.20  
-C_ID_33852   Mary Childs        Furniture          Chromcraft Conference Tables           Consumer          South Bend     Indiana        United States   Central         Late delivery    2015-01-03 00:00:00  CA-2015-104269  2015-06-03 00:00:00  Second Class    89.99                499.95           5              192.68  
-C_ID_44861   Mary Yedwab        Office Supplies    Eureka Sanitaire Commercial Upright    Consumer          Chicago        Illinois       United States   Central         Shipping on time 2015-01-03 00:00:00  CA-2016-124107  2015-05-03 00:00:00  Standard Class  34.00                199.99           4              43.16  
-C_ID_36140   Theresa McAdams    Office Supplies    Kleencut Forged Office Shears         Home Office      Morgan Hill    California     United States   West            Advance shipping 2015-01-03 00:00:00  US-2016-164966  2015-05-03 00:00:00  Standard Class  20.00                499.95           5              225.58  
-C_ID_47887   Ronald Cooley      Office Supplies    Cameo Buff Policy Envelopes           Consumer          Parma          Ohio           United States   East            Shipping on time 2015-01-03 
+```python
+# Install necessary libraries
+!pip install matplotlib seaborn
+
+# Convert order_date to datetime
+df['order_date'] = pd.to_datetime(df['order_date'])
+
+# Extract year and month for trend analysis
+df['year'] = df['order_date'].dt.year
+df['month'] = df['order_date'].dt.month
+
+# Monthly Sales Trend: Aggregate sales by month across all years
+monthly_trends = df.groupby('month').sum(numeric_only=True)['sales_per_order'].reset_index()
+
+# Plot Monthly Sales Trends
+plt.figure(figsize=(10, 6))
+sns.lineplot(data=monthly_trends, x='month', y='sales_per_order', marker='o', color='blue')
+plt.title('Monthly Sales Trends (All Years)')
+plt.xlabel('Month')
+plt.ylabel('Total Sales')
+plt.xticks(range(1, 13))  # Ensure months are displayed correctly
+plt.show()
+
+
+![image](https://github.com/user-attachments/assets/58a12a1c-1e7b-4e6a-8efc-a9505338cc00)
+
+
+# Yearly Sales Trend
+
+```python
+# Yearly Sales Trend: Aggregate sales by year
+yearly_trends = df.groupby('year').sum(numeric_only=True)['sales_per_order'].reset_index()
+     
+
+# Plot Yearly Sales Trends
+plt.figure(figsize=(10, 6))
+sns.barplot(data=yearly_trends, x='year', y='sales_per_order', palette='viridis')
+plt.title('Yearly Sales Trends')
+plt.xlabel('Year')
+plt.ylabel('Total Sales')
+plt.show()
+
+
