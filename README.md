@@ -38,17 +38,35 @@ b. Discover which segments show the most interest in specific products or catego
 ## Methodology
 This project was conducted using Excel and Python, with data sourced from an e-commerce store. The methodology followed a systematic approach that involved several key steps:
 
-Data cleaning: The data was first cleaned using Microsoft Excel to ensure accuracy by addressing missing values, correcting data inconsistencies and standardizing entries.
-Data transformation: key variables were transformed to make the data suitable for analysis.
-
-Exploratory Data Analysis (EDA): Through EDA, I explored trends in customers, examine customers retention and operational efficiency in other to improve the sales of the business.
-
-Advanced Analysis: I conducted more advanced analysis including predicting outcomes, uncovering trends and patterns, and also operational efficiency using Python
-Dashboard Creation: I created an interactive dashboard in Python using matploylib.pylot and seaborn libraries.
+1. Data cleaning: The data was first cleaned using Microsoft Excel to ensure accuracy by addressing missing values, correcting data inconsistencies and standardizing entries.
+2. Data transformation: key variables were transformed to make the data suitable for analysis.
+3. Exploratory Data Analysis (EDA): Through EDA, I explored trends in customers, examine customers retention and operational efficiency in other to improve the sales of the business.
+4. Advanced Analysis: I conducted more advanced analysis including predicting outcomes, uncovering trends and patterns, and also operational efficiency using Python
+5. Dashboard Creation: I created an interactive dashboard in Python using matploylib.pylot and seaborn libraries.
 
 ## Analysis
-Objective 1. Sales Trends Analysis
+
+### Objective 1. Sales Trends Analysis
 
 a. Identify historical sales trends (e.g., monthly, seasonal, or annual patterns).
 
+```python
+# Import Necessary Libraries
+import pandas as pd
+import seaborn as sns
+import numpy as np
+import matplotlib.pyplot as plt
 
+# Load the Excel file
+data = pd.read_excel('/content/sample_data/dataset for ecommerce.xlsx')
+
+# Display the first 5 rows
+print(data.head())
+
+```plaintext
+customer_id  customer_full_name  category_name       product_name                            customer_segment  customer_city   customer_state  customer_country  customer_region  delivery_status  order_date           order_id          ship_date          shipping_type  order_item_discount  sales_per_order  order_quantity  profit_per_order  
+C_ID_55205   Mary Howell        Office Supplies    Xerox 1898                              Consumer          Quincy         Massachusetts  United States   East            Late delivery    2015-01-02 00:00:00  CA-2015-140795  2015-03-02 00:00:00  Standard Class  8.80                 159.96           1              -32.20  
+C_ID_33852   Mary Childs        Furniture          Chromcraft Conference Tables           Consumer          South Bend     Indiana        United States   Central         Late delivery    2015-01-03 00:00:00  CA-2015-104269  2015-06-03 00:00:00  Second Class    89.99                499.95           5              192.68  
+C_ID_44861   Mary Yedwab        Office Supplies    Eureka Sanitaire Commercial Upright    Consumer          Chicago        Illinois       United States   Central         Shipping on time 2015-01-03 00:00:00  CA-2016-124107  2015-05-03 00:00:00  Standard Class  34.00                199.99           4              43.16  
+C_ID_36140   Theresa McAdams    Office Supplies    Kleencut Forged Office Shears         Home Office      Morgan Hill    California     United States   West            Advance shipping 2015-01-03 00:00:00  US-2016-164966  2015-05-03 00:00:00  Standard Class  20.00                499.95           5              225.58  
+C_ID_47887   Ronald Cooley      Office Supplies    Cameo Buff Policy Envelopes           Consumer          Parma          Ohio           United States   East            Shipping on time 2015-01-03 
